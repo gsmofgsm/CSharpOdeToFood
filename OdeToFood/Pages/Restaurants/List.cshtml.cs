@@ -24,10 +24,14 @@ namespace OdeToFood.Pages.Restaurants
             this.restaurantData = restaurantData;
         }
 
-        public void OnGet()
-        {
+        public void OnGet(string searchTerm) // model binding, it will look in post request, query string, headers ..., even custom binder
+        {// if searchTerm is not found, it will be given null reference, if its type is int, there will be null reference exception, but with string, it is ok
+            // HttpContext.Request.QueryString;  // each razor page has a HttpContext property
+            // but a better way is model binding
+
+
             Message = config["Message"];
-            Restaurants = restaurantData.GetAll();
+            Restaurants = restaurantData.GetRestaurantsByName(searchTerm);
         }
     }
 }
