@@ -39,9 +39,15 @@ namespace OdeToFood.Pages.Restaurants
         {
             // validation can be done here using if ...
             // easier solution is to add attributes in Models
+            // now we have ModelState
+            //ModelState["Location"].AttemptedValue
+            if (ModelState.IsValid)
+            {
+                restaurantData.Update(Restaurant);
+                restaurantData.Commit();
+            }
+
             Cuisines = htmlHelper.GetEnumSelectList<CuisineType>();
-            Restaurant = restaurantData.Update(Restaurant);
-            restaurantData.Commit();
             return Page();
         }
     }
