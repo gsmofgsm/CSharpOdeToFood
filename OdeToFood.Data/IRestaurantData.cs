@@ -13,6 +13,7 @@ namespace OdeToFood.Data
         // we program to an interface
         // to allow smooth switching to database later
         IEnumerable<Restaurant> GetRestaurantsByName(string name);
+        Restaurant GetById(int id);
     }
     public class InMemoryRestaurantData : IRestaurantData
     {
@@ -27,6 +28,12 @@ namespace OdeToFood.Data
                     new Restaurant { Id = 3, Name = "La Costa", Location = "California", Cuisine = CuisineType.None},
                 };
         }
+
+        public Restaurant GetById(int id)
+        {
+            return restaurants.SingleOrDefault(r => r.Id == id);
+        }
+
         public IEnumerable<Restaurant> GetRestaurantsByName(string name = null)
         {
             return from r in restaurants
