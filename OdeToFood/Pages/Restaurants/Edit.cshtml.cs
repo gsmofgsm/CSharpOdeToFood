@@ -45,6 +45,10 @@ namespace OdeToFood.Pages.Restaurants
             {
                 restaurantData.Update(Restaurant);
                 restaurantData.Commit();
+                // always redirect user to a get page
+                // so it will be safe for page refresh
+                // good redirect for edit is to detail page
+                return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id });
             }
 
             Cuisines = htmlHelper.GetEnumSelectList<CuisineType>();
