@@ -49,18 +49,26 @@ namespace OdeToFood.Pages.Restaurants
             // easier solution is to add attributes in Models
             // now we have ModelState
             //ModelState["Location"].AttemptedValue
-            if (ModelState.IsValid)
+
+            if (!ModelState.IsValid)
             {
-                restaurantData.Update(Restaurant);
-                restaurantData.Commit();
-                // always redirect user to a get page
-                // so it will be safe for page refresh
-                // good redirect for edit is to detail page
-                return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id });
+                Cuisines = htmlHelper.GetEnumSelectList<CuisineType>();
+                return Page();
             }
 
-            Cuisines = htmlHelper.GetEnumSelectList<CuisineType>();
-            return Page();
+            if (Restaurant.Id > 0)
+            {
+                restaurantData.Update(Restaurant);
+            }
+            else
+            {
+                restaurantData.Add(Restaurant);
+            }
+            restaurantData.Commit();
+            // always redirect user to a get page
+            // so it will be safe for page refresh
+            // good redirect for edit is to detail page
+            return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id });
         }
     }
 }
