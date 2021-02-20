@@ -65,6 +65,7 @@ namespace OdeToFood.Pages.Restaurants
                 restaurantData.Add(Restaurant);
             }
             restaurantData.Commit();
+            TempData["Message"] = "Restaurant saved!"; // property that is only avaible for next request/page
             // always redirect user to a get page
             // so it will be safe for page refresh
             // good redirect for edit is to detail page
