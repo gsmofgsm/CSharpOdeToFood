@@ -11,9 +11,10 @@ namespace OdeToFood.Pages.Restaurants
     public class DetailModel : PageModel
     {
         public Restaurant Restaurant { get; set; }
-        public void OnGet()
+        public void OnGet(int restaurantId)  // this restaurantId is purely input
         {
             Restaurant = new Restaurant();
+            Restaurant.Id = restaurantId;
         }
     }
 }
