@@ -12,7 +12,7 @@ namespace OdeToFood.Data
         // .net core follows dependency inversion pattern
         // we program to an interface
         // to allow smooth switching to database later
-        IEnumerable<Restaurant> GetAll();
+        IEnumerable<Restaurant> GetRestaurantsByName(string name);
     }
     public class InMemoryRestaurantData : IRestaurantData
     {
@@ -27,9 +27,10 @@ namespace OdeToFood.Data
                     new Restaurant { Id = 3, Name = "La Costa", Location = "California", Cuisine = CuisineType.None},
                 };
         }
-        public IEnumerable<Restaurant> GetAll()
+        public IEnumerable<Restaurant> GetRestaurantsByName(string name = null)
         {
             return from r in restaurants
+                   where string.IsNullOrEmpty(name) || r.Name.StartsWith(name)
                    orderby r.Name
                    select r;
         }
