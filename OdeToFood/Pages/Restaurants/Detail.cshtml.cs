@@ -20,9 +20,15 @@ namespace OdeToFood.Pages.Restaurants
             this.restaurantData = restaurantData;
         }
 
-        public void OnGet(int restaurantId)  // this restaurantId is purely input, it can be from query string or route, our page knows it!
+        public IActionResult OnGet(int restaurantId)  // this restaurantId is purely input, it can be from query string or route, our page knows it!
         {
             Restaurant = restaurantData.GetById(restaurantId);
+            if (Restaurant == null)
+            {
+                return RedirectToPage("./NotFound");
+            }
+            return Page();  // if the method returns void, the html page will always be renderd
+            // if we return something, render html page
         }
     }
 }
