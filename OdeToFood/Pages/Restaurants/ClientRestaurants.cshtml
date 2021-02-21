@@ -10,7 +10,7 @@
 @section Scripts {
     <script>
         $(function () {
-            $.ajax('api/restaurants/', { method: "get" })
+            $.ajax('/api/restaurants/', { method: "get" })
                 .then(function (results) {
                     console.log('works', results);
                 });
