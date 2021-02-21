@@ -34,7 +34,8 @@ namespace OdeToFood
             // because a List is not thread safe
             // it's not able to process multiple requests
             // this is just for development
-            services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
+            //services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
+            services.AddScoped<IRestaurantData, SqlRestaurantData>();  // now we use the real service
 
             services.AddRazorPages();
         }
