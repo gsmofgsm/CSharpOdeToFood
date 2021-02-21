@@ -11,8 +11,8 @@
     <script>
         $(function () {
             $.ajax('/api/restaurants/', { method: "get" })
-                .then(function (results) {
-                    console.log('works', results);
+                .then(function (response) {
+                    console.dir(response);
                 });
         });
     </script>
